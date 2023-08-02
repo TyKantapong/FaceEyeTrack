@@ -49,7 +49,7 @@ while True:
     if face is not None:
 
         # calling landmarks detector funciton.
-        image, PointList = m.faceLandmakDetector(frame, grayFrame, face, False)
+        image, PointList = m.faceLandmakDetector(frame, grayFrame, face, True)
         # print(PointList)
 
         cv.putText(frame, f'FPS: {round(FPS,1)}',
@@ -58,8 +58,8 @@ while True:
         LeftEyePoint = PointList[42:48]
         leftRatio, topMid, bottomMid = m.blinkDetector(LeftEyePoint)
         rightRatio, rTop, rBottom = m.blinkDetector(RightEyePoint)
-        # cv.circle(image, topMid, 2, m.YELLOW, -1)
-        # cv.circle(image, bottomMid, 2, m.YELLOW, -1)
+        cv.circle(image, topMid, 2, m.YELLOW, -1)
+        cv.circle(image, bottomMid, 2, m.YELLOW, -1)
 
         blinkRatio = (leftRatio + rightRatio)/2
         cv.circle(image, circleCenter, (int(blinkRatio*4.3)), m.CHOCOLATE, -1)
